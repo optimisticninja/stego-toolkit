@@ -1,0 +1,34 @@
+-- Makefile.orig	2021-01-31 08:49:57.904938275 -0500
++++ Makefile	2021-01-31 08:50:12.068602369 -0500
+@@ -1,6 +1,7 @@
+ # variables
+ HDOBJECTS = jphide.o bf.o
+ SKOBJECTS = jpseek.o bf.o
++CROBJECTS = jpcrack.o bf.o
+ 
+ ## flags
+ CFLAGS_COMMON = -O2
+@@ -29,19 +30,21 @@
+ BINDIR = $(PREFIX)/bin
+ 
+ # targets
+-TARGETS = jphide jpseek
++TARGETS = jphide jpseek jpcrack
+ all: $(TARGETS)
+ jphide: $(HDOBJECTS)
+ jpseek: $(SKOBJECTS)
++jpcrack: $(CROBJECTS)
+ 
+ # object rules
+ bf.o:			CFLAGS=$(BF_CFLAGS)
+-jphide.o jpseek.o:	CFLAGS=$(JP_CFLAGS)
++jphide.o jpseek.o jpcrack.o:	CFLAGS=$(JP_CFLAGS)
+ 
+ # dependencies
+ bf.c: bf.h bf_config.h
+ jphide.c: ltable.h version.h bf.h
+ jpseek.c: ltable.h version.h bf.h
++jpcrack.c: ltable.h version.h bf.h
+ 
+ # other targets
+ clean:
